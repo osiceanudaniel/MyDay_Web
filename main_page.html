@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MyDay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myImg:hover {opacity: 0.7;}
+    </style>
+
+    <style>
+    .demo-layout-transparent {
+      background: url('../assets/demos/transparent.jpg') center / cover;
+    }
+    .demo-layout-transparent .mdl-layout__header,
+    .demo-layout-transparent .mdl-layout__drawer-button {
+      /* This background is dark, so we set text to white. Use 87% black instead if
+         your background is light. */
+      color: white;
+    }
+    </style>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="css/style_page.css"/>
+
+</head>
+<body style="background: #FAFAFA">
+  <button id="butonModal" hidden="hidden" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Hidden Modal Button
+  </button>
+
+<!-- MDOAL -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete note!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this note?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button onclick="deleteCurrentNote()" type="button" class="btn btn-success">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END MODAL  -->
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout-icon"></div>
+    <div class="mdl-layout__header-row">
+      <span id="titlu" class="mdl-layout__title">MyDay</span>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-layout__header-row">
+        <img id="imageID" src="imagini/defaultPicture.png" alt="Avatar" style="width:52px; border-radius: 50%; border:1.5px solid #448AFF;">
+      </div>
+      <!-- <span id="username_id" class="mdl-layout__title"></span> -->
+      <div class="mdl-layout-spacer"></div>
+      <button onclick="addNote()" style="width: 50px; height: 50px; margin-right: 20px" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">note_add</i>
+      </button>
+      <nav class="mdl-navigation">
+        <span id="username_id" class="mdl-layout__title"></span>
+      </nav>
+      <!-- <nav class="mdl-navigation">
+        <button onclick="logout()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Log Out <i class="material-icons" style="margin-left: 8px">account_circle</i>
+        </button>
+      </nav> -->
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span id="username_drawer_id" class="mdl-layout-title"></span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="#" onclick="addNote()">Add Note</a>
+      <a class="mdl-navigation__link" href="http://localhost/licenta/edit_profile.html">Edit Profile</a>
+      <a class="mdl-navigation__link" href="#" onclick="logout()">Log Out</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <!-- <h1 id="username_id" style="text-align: center"></h1> -->
+    <div class="page-content">
+      <div id="list_elements" style="margin-top: 25px;" class="container">
+
+        <!-- <div class="well">
+            <div class="media">
+              <a class="pull-left" href="#">
+                  <img id="myImg" class="media-object" src="imagini/defaultSelectImage.jpg" style="width: 200px; height: 200px; margin-right: 10px">
+              </a>
+            <div class="media-body">
+              <h4 style="border-bottom: 1px solid; border-bottom-color: #448AFF; font-size: 30px" class="media-heading">
+                <b>Title</b>
+              </h4>
+             <p style="margin-top: 20px; font-size: 20px">Text</p>
+             </div>
+             <button id="deleteBtn" onclick="deleteNote(this.id)" style="margin-top: 80px; float: right; margin-left: 25px" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Delete <i class="material-icons">delete</i>
+              </button>
+             <button id="editBtn" style="margin-top: 80px; float: right" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Edit <i class="material-icons">mode_edit</i>
+              </button>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBvbfphnLesNjt8nqTNVVfbTXVdzCcYDeg",
+    authDomain: "myday-f50e8.firebaseapp.com",
+    databaseURL: "https://myday-f50e8.firebaseio.com",
+    projectId: "myday-f50e8",
+    storageBucket: "myday-f50e8.appspot.com",
+    messagingSenderId: "73330671331"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="javascript/main_page_script.js"></script>
+<script src="javascript/edit.js"></script>
+</body>
+</html>

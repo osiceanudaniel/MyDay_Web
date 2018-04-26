@@ -1,0 +1,31 @@
+.circular {
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	}
+
+	div.polaroid {
+	  width: 35%;
+	  background-color: white;
+	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	  margin-bottom: 25px;
+	}
+
+	#myProgress {
+	  width: 100%;
+	  background-color: #ddd;
+	}
+
+	#myBar {
+	  width: 10%;
+	  height: 30px;
+	  background-color: #4CAF50;
+	  text-align: center;
+	  line-height: 30px;
+	  color: white;
+	}

@@ -1,0 +1,8 @@
+{
+  "name": "proiect_licenta",
+  "description": "Bower pentru licenta",
+  "version": "1.0.0",
+  "dependencies": {
+    "croppie": "^2.6"
+  }
+}
